@@ -18,25 +18,16 @@ class Categories
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $salade;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $salees;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $sucrees;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Recette", mappedBy="categories")
      */
     private $recettecategories;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $typeCategories;
 
     public function __construct()
     {
@@ -48,41 +39,7 @@ class Categories
         return $this->id;
     }
 
-    public function getSalade(): ?string
-    {
-        return $this->salade;
-    }
 
-    public function setSalade(string $salade): self
-    {
-        $this->salade = $salade;
-
-        return $this;
-    }
-
-    public function getSalees(): ?string
-    {
-        return $this->salees;
-    }
-
-    public function setSalees(string $salees): self
-    {
-        $this->salees = $salees;
-
-        return $this;
-    }
-
-    public function getSucrees(): ?string
-    {
-        return $this->sucrees;
-    }
-
-    public function setSucrees(string $sucrees): self
-    {
-        $this->sucrees = $sucrees;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Recette[]
@@ -111,6 +68,18 @@ class Categories
                 $recettecategory->setCategories(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTypeCategories(): ?string
+    {
+        return $this->typeCategories;
+    }
+
+    public function setTypeCategories(string $typeCategories): self
+    {
+        $this->typeCategories = $typeCategories;
 
         return $this;
     }

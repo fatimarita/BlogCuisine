@@ -26,8 +26,17 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ path('presentation') }}">Présentation</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ path('categories') }}">Categories</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href= id="{{ path('categories') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {{ render(controller(
+                                'App\\Controller\\NavbarController::navbar'
+                            )) }}
+                        </div>
+
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ path('contact') }}">Contact</a>
@@ -45,6 +54,11 @@
 <main class="container">
     {% block body %}{% endblock %}
 </main>
+
+
+
+
+
 
 {% block js %}
     <script src="/js/jquery-3.3.1.min.js"></script>
