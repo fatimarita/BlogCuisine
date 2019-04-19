@@ -1,6 +1,7 @@
 
 {% for categorie in categories %}
-    <a class="dropdown-item" href="{#}{ path('categories', {slug: categorie.slug}) }#}">
+    <a class="dropdown-item" href="{{ path('categories', {'id': 'x'}) }}">
+
         {{ categorie.typecategories }}
     </a>
 {% endfor %}

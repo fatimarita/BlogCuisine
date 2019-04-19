@@ -6,3 +6,20 @@ easy_admin:
       class: App\Entity\Categories
     Recette:
       class: App\Entity\Recette
+      form:
+          fields:
+            - title
+            - content
+            - nbViews
+            - imageAlt
+            - likes
+            - user
+            - comment
+            - categories
+            -
+                  property: ImageFile
+                  type: "file"
+
+
+
+

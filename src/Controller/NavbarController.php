@@ -13,7 +13,7 @@ class NavbarController extends AbstractController
 
     public function navbar(categoriesRepository $categoriesRepository): Response
     {
-        return $this->render('blog/navbar.html.twig', [
+        return $this->render('/navbar.html.twig', [
             'categories' => $categoriesRepository->findAll(),
         ]);
     }

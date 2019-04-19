@@ -2,10 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RecetteRepository")
+ * @Vich\Uploadable
  */
 class Recette
 {
@@ -35,6 +40,18 @@ class Recette
      * @ORM\Column(type="integer")
      */
     private $nbViews;
+
+
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="recette_image", fileNameProperty="imageSrc")
+     *
+     * @var File
+     */
+    private $imageFile;
+
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -66,6 +83,37 @@ class Recette
      * @ORM\JoinColumn(nullable=false)
      */
     private $categories;
+
+    /**
+     * On initialise :
+     * - la date de création
+     * - le nombre de vues
+     * - le nombre de likes
+     *
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        // On ajoute la date de création
+        $this->setCreatedAt(new \DateTime());
+        // On initialise le nombre de vues à 0
+        $this->setNbViews(0);
+        // On initialise le nombre de likes à 0
+        $this->setLikes(0);
+        // OneToMany
+        $this->comments = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
+    }
+    /**
+     * Permet de convertir en objet en chaine de caractères
+     * Utilisé automatiquement pour afficher la liste déroulante
+     * ... du formulaire des commentaires
+     * @return mixed
+     */
+    public function __toString()
+    {
+        return $this->title;
+    }
 
     public function getId(): ?int
     {
@@ -190,5 +238,19 @@ class Recette
         $this->categories = $categories;
 
         return $this;
+    }
+    public function setImageFile(?File $imageFile = null)
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
     }
 }

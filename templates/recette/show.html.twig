@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+ {% block title %}Détail de la recette{% endblock %}
+
+ {% block body %}
+
+     <h1>{{ recette.title }}</h1>
+     <p>{{ article.description }}</p>
+
+     <a href="{{ path('recette_list') }}">Retour à la liste des articles</a>
+ {% endblock %}
+
+

@@ -12,7 +12,7 @@ class PresentationController extends AbstractController
      */
     public function presentation()
     {
-        return $this->render('blog/presentation.html.twig', [
+        return $this->render('/presentation.html.twig', [
             'controller_name' => 'PresentationController',
         ]);
     }

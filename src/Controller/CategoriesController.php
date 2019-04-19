@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Categories;
+use App\Entity\Recette;
 use App\Form\CategoriesType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,15 +13,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoriesController extends AbstractController
 {
     /**
-     * @Route("/categories", name="categories")
+     * @Route("/categories/{id}", name="categories")
      */
-    public function categories()
+    public function categories($id)
     {
-
-        return $this->render('blog/categories.html.twig', [
+$repo = $this->getDoctrine()->getRepository(Recette::class);
+$recette = $repo->find($id);
+        return $this->render('categories/categories.html.twig', [
             'controller_name' => 'CategoriesController',
+            'recette' => $recette
         ]);
     }
+
+
 
 
 

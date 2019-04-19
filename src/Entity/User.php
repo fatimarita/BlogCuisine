@@ -5,43 +5,20 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
  */
-class User
+class User extends BaseUser
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private $username;
-
-    /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=30)
-     */
-    private $password;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isEnabled;
-
-    /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private $role;
+    protected $id;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Recette", mappedBy="user")
@@ -54,74 +31,11 @@ class User
     private $usercommentaire;
 
     public function __construct()
+
     {
+        parent::__construct();
         $this->recettes = new ArrayCollection();
         $this->usercommentaire = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getIsEnabled(): ?bool
-    {
-        return $this->isEnabled;
-    }
-
-    public function setIsEnabled(bool $isEnabled): self
-    {
-        $this->isEnabled = $isEnabled;
-
-        return $this;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
-
-        return $this;
     }
 
     /**
